@@ -70,6 +70,26 @@ input {
   font-size: 1rem;
 }
 
+.full-menu-section {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  padding: clamp(1rem, 4vw, 3rem);
+  background: var(--flour);
+}
+
+.full-menu-section figure {
+  margin: 0;
+}
+
+.full-menu-section img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
 .hero {
   position: relative;
   min-height: min(720px, 100vh);
@@ -676,6 +696,7 @@ h3 {
 
   .hero-layout,
   .section-heading,
+  .full-menu-section,
   .offers-layout,
   .contact-section,
   .modal-panel {
@@ -737,6 +758,7 @@ h3 {
 
   .menu-section,
   .offers-section,
+  .full-menu-section,
   .contact-section {
     padding-inline: 0.75rem;
   }
