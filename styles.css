@@ -497,8 +497,8 @@ h3 {
 
 .product-top {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.75rem;
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
   align-items: start;
 }
 
@@ -507,7 +507,8 @@ h3 {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 2vw, 1.55rem);
   line-height: 1.08;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .price {
@@ -515,7 +516,7 @@ h3 {
   font-size: 0.92rem;
   font-weight: 900;
   line-height: 1.2;
-  text-align: right;
+  text-align: left;
 }
 
 .product-description {
@@ -765,8 +766,12 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .product-top {
-    align-items: flex-start;
+  .product-title {
+    font-size: 1.45rem;
+  }
+
+  .price {
+    font-size: 0.9rem;
   }
 
   .product-card img {
