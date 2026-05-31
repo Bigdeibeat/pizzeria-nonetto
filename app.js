@@ -1,13 +1,21 @@
 const categoryImages = {
-  pizzas: "assets/CartaPizzeriaNonetto01.png",
-  hamburguesas: "assets/CartaPizzeriaNonetto02.png",
-  sandwiches: "assets/CartaPizzeriaNonetto02.png",
-  pontys: "assets/CartaPizzeriaNonetto02.png",
-  postres: "assets/CartaPizzeriaNonetto02.png",
-  ensaladas: "assets/CartaPizzeriaNonetto03.png",
-  complementos: "assets/CartaPizzeriaNonetto03.png",
-  baguettes: "assets/CartaPizzeriaNonetto03.png"
+  pizzas: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=900&q=80",
+  hamburguesas: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80",
+  sandwiches: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=900&q=80",
+  pontys: "https://images.unsplash.com/photo-1619860860774-1e2e17343432?auto=format&fit=crop&w=900&q=80",
+  postres: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=80",
+  ensaladas: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80",
+  complementos: "https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=900&q=80",
+  baguettes: "https://images.unsplash.com/photo-1553909489-cd47e0907980?auto=format&fit=crop&w=900&q=80"
 };
+
+const pizzaImages = [
+  "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1601924582970-9238bcb495d9?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=900&q=80"
+];
 
 const categoryLabels = {
   pizzas: "Pizzas",
@@ -24,6 +32,12 @@ function slugify(value) {
   return normalise(value).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
+function imageFor(category, name) {
+  if (category !== "pizzas") return categoryImages[category];
+  const index = Math.abs([...name].reduce((sum, char) => sum + char.charCodeAt(0), 0)) % pizzaImages.length;
+  return pizzaImages[index];
+}
+
 function item(category, name, description, price, tags = []) {
   return {
     id: `${category}-${slugify(name)}`,
@@ -34,7 +48,7 @@ function item(category, name, description, price, tags = []) {
     prices: price,
     fromPrice: price,
     tags,
-    image: categoryImages[category]
+    image: imageFor(category, name)
   };
 }
 
@@ -127,16 +141,29 @@ const products = [
   item("baguettes", "Baguette Nonetto", "Bacon, queso de cabra y lomo adobado.", "6,00 EUR", ["popular", "gluten", "lácteos"])
 ];
 
+const searchableProducts = products.map((product) => ({
+  ...product,
+  searchText: normalise(`${product.name} ${product.description} ${product.categoryLabel} ${product.tags.join(" ")}`)
+}));
+
 const menuGrid = document.querySelector("#menuGrid");
 const searchInput = document.querySelector("#searchInput");
 const resultCount = document.querySelector("#resultCount");
 const activeContext = document.querySelector("#activeContext");
 const filterButtons = [...document.querySelectorAll(".filter-button")];
-const tagButtons = [...document.querySelectorAll(".tag-filter")];
 const modal = document.querySelector("#productModal");
+const modalElements = {
+  image: document.querySelector("#modalImage"),
+  category: document.querySelector("#modalCategory"),
+  title: document.querySelector("#modalTitle"),
+  description: document.querySelector("#modalDescription"),
+  prices: document.querySelector("#modalPrices"),
+  tags: document.querySelector("#modalTags"),
+  closeButton: document.querySelector(".modal-close")
+};
 
 let activeCategory = "todos";
-const activeTags = new Set();
+let pendingSearchFrame = null;
 
 function normalise(value) {
   return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -144,18 +171,27 @@ function normalise(value) {
 
 function productMatchesSearch(product, query) {
   if (!query) return true;
-  const haystack = normalise(`${product.name} ${product.description} ${product.tags.join(" ")}`);
-  return haystack.includes(normalise(query));
+  return product.searchText.includes(normalise(query));
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
 }
 
 function productMatchesFilters(product) {
   const categoryMatch = activeCategory === "todos" || product.category === activeCategory;
-  const tagsMatch = activeTags.size === 0 || [...activeTags].every((tag) => product.tags.includes(tag));
-  return categoryMatch && tagsMatch;
+  return categoryMatch;
 }
 
 function getVisibleProducts() {
-  return products.filter((product) => productMatchesFilters(product) && productMatchesSearch(product, searchInput.value.trim()));
+  const query = searchInput.value.trim();
+  return searchableProducts.filter((product) => productMatchesFilters(product) && productMatchesSearch(product, query));
 }
 
 function renderProducts() {
@@ -163,27 +199,23 @@ function renderProducts() {
   menuGrid.innerHTML = visibleProducts.map(renderProductCard).join("");
   resultCount.textContent = `${visibleProducts.length} ${visibleProducts.length === 1 ? "producto" : "productos"}`;
   activeContext.textContent = buildContextText();
-
-  document.querySelectorAll("[data-product-id]").forEach((button) => {
-    button.addEventListener("click", () => openProduct(button.dataset.productId));
-  });
 }
 
 function renderProductCard(product) {
-  const tags = product.tags.map((tag) => `<span class="chip">${tag}</span>`).join("");
+  const tags = product.tags.map((tag) => `<span class="chip">${escapeHtml(tag)}</span>`).join("");
 
   return `
     <article class="product-card">
-      <img src="${product.image}" alt="${product.name}">
+      <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy" decoding="async">
       <div class="product-body">
         <div class="product-top">
-          <h3 class="product-title">${product.name}</h3>
-          <span class="price">${product.fromPrice}</span>
+          <h3 class="product-title">${escapeHtml(product.name)}</h3>
+          <span class="price">${escapeHtml(product.fromPrice)}</span>
         </div>
-        <p class="product-description">${product.description}</p>
-        <div class="chips" aria-label="Etiquetas de ${product.name}">${tags}</div>
+        <p class="product-description">${escapeHtml(product.description)}</p>
+        <div class="chips" aria-label="Etiquetas de ${escapeHtml(product.name)}">${tags}</div>
         <div class="product-actions">
-          <button class="details-button" type="button" data-product-id="${product.id}">Ver detalle</button>
+          <button class="details-button" type="button" data-product-id="${escapeHtml(product.id)}">Ver detalle</button>
         </div>
       </div>
     </article>
@@ -192,9 +224,8 @@ function renderProductCard(product) {
 
 function buildContextText() {
   const categoryText = activeCategory === "todos" ? "toda la carta" : `categoría ${activeCategory}`;
-  const tagText = activeTags.size ? ` con ${[...activeTags].join(", ")}` : "";
   const queryText = searchInput.value.trim() ? ` buscando "${searchInput.value.trim()}"` : "";
-  return `Mostrando ${categoryText}${tagText}${queryText}`;
+  return `Mostrando ${categoryText}${queryText}`;
 }
 
 function setActiveCategory(category) {
@@ -205,32 +236,21 @@ function setActiveCategory(category) {
   renderProducts();
 }
 
-function toggleTag(tag, button) {
-  if (activeTags.has(tag)) {
-    activeTags.delete(tag);
-  } else {
-    activeTags.add(tag);
-  }
-
-  button.classList.toggle("is-active", activeTags.has(tag));
-  renderProducts();
-}
-
 function openProduct(productId) {
-  const product = products.find((item) => item.id === productId);
+  const product = searchableProducts.find((item) => item.id === productId);
   if (!product) return;
 
-  document.querySelector("#modalImage").src = product.image;
-  document.querySelector("#modalImage").alt = product.name;
-  document.querySelector("#modalCategory").textContent = product.categoryLabel;
-  document.querySelector("#modalTitle").textContent = product.name;
-  document.querySelector("#modalDescription").textContent = product.description;
-  document.querySelector("#modalPrices").textContent = product.prices;
-  document.querySelector("#modalTags").textContent = product.tags.join(", ");
+  modalElements.image.src = product.image;
+  modalElements.image.alt = product.name;
+  modalElements.category.textContent = product.categoryLabel;
+  modalElements.title.textContent = product.name;
+  modalElements.description.textContent = product.description;
+  modalElements.prices.textContent = product.prices;
+  modalElements.tags.textContent = product.tags.join(", ");
 
   modal.hidden = false;
   document.body.style.overflow = "hidden";
-  document.querySelector(".modal-close").focus();
+  modalElements.closeButton.focus();
 }
 
 function closeModal() {
@@ -242,11 +262,19 @@ filterButtons.forEach((button) => {
   button.addEventListener("click", () => setActiveCategory(button.dataset.filter));
 });
 
-tagButtons.forEach((button) => {
-  button.addEventListener("click", () => toggleTag(button.dataset.tag, button));
+searchInput.addEventListener("input", () => {
+  if (pendingSearchFrame) cancelAnimationFrame(pendingSearchFrame);
+  pendingSearchFrame = requestAnimationFrame(() => {
+    renderProducts();
+    pendingSearchFrame = null;
+  });
 });
 
-searchInput.addEventListener("input", renderProducts);
+menuGrid.addEventListener("click", (event) => {
+  const detailsButton = event.target.closest("[data-product-id]");
+  if (!detailsButton) return;
+  openProduct(detailsButton.dataset.productId);
+});
 
 document.querySelectorAll("[data-close-modal]").forEach((element) => {
   element.addEventListener("click", closeModal);

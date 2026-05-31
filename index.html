@@ -7,24 +7,11 @@
   <title>Pizzería Nonetto - Carta y pedidos</title>
   <meta name="description"
     content="Carta digital de Pizzería Nonetto en San Fernando. Consulta pizzas, hamburguesas, sandwiches, pontys, ensaladas, complementos, baguettes, postres y llama para hacer tu pedido.">
+  <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <header class="site-header">
-    <a class="brand" href="#inicio" aria-label="Volver al inicio">
-      <img src="assets/logo-nonetto.png" alt="Pizzería Nonetto">
-    </a>
-
-    <nav class="main-nav" aria-label="Navegación principal">
-      <a href="#ofertas">Ofertas</a>
-      <a href="#carta">Carta</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-
-    <a class="call-link" href="tel:+34956900101">956 900 101</a>
-  </header>
-
   <main id="inicio">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-media">
@@ -45,6 +32,31 @@
           >
         </picture>
       </div>
+      <header class="hero-header">
+        <a class="hero-brand" href="#inicio" aria-label="Volver al inicio">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="assets/logo-nonetto-160.webp 160w, assets/logo-nonetto-320.webp 320w"
+              sizes="(max-width: 560px) 56px, 80px"
+            >
+            <img
+              src="assets/logo-nonetto-320.png"
+              srcset="assets/logo-nonetto-160.png 160w, assets/logo-nonetto-320.png 320w"
+              sizes="(max-width: 560px) 56px, 80px"
+              width="320"
+              height="320"
+              alt="Pizzería Nonetto"
+            >
+          </picture>
+        </a>
+        <nav class="hero-nav" aria-label="Navegación principal">
+          <a href="#ofertas">Ofertas</a>
+          <a href="#carta">Carta</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+        <a class="hero-phone" href="tel:+34956900101">956 900 101</a>
+      </header>
       <div class="hero-layout">
         <div class="hero-content">
           <p class="eyebrow">Pizzería Nonetto · San Fernando</p>
@@ -167,14 +179,6 @@
           <button class="filter-button" type="button" data-filter="postres">Postres</button>
         </div>
 
-        <div class="quick-tags" aria-label="Filtros rápidos">
-          <button class="tag-filter" type="button" data-tag="popular">Popular</button>
-          <button class="tag-filter" type="button" data-tag="vegetariana">Vegetariana</button>
-          <button class="tag-filter" type="button" data-tag="picante">Picante</button>
-          <button class="tag-filter" type="button" data-tag="para compartir">Para compartir</button>
-          <button class="tag-filter" type="button" data-tag="nonetto classic">Nonetto Classic</button>
-          <button class="tag-filter" type="button" data-tag="nonetto deluxe">Nonetto Deluxe</button>
-        </div>
       </div>
 
       <div class="menu-summary" aria-live="polite">
@@ -198,11 +202,6 @@
       </div>
     </section>
   </main>
-
-  <nav class="mobile-order-bar" aria-label="Acciones rápidas para móvil">
-    <a href="#carta">Ver carta</a>
-    <a href="tel:+34956900101">Llamar</a>
-  </nav>
 
   <div class="modal" id="productModal" hidden>
     <div class="modal-backdrop" data-close-modal></div>
