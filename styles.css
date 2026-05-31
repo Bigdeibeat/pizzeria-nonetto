@@ -1,5 +1,6 @@
 :root {
   --tomato: #d9251d;
+  --blue: #1d89d9;
   --tomato-dark: #8f1712;
   --olive: #566b2f;
   --cream: #fff6e7;
@@ -58,7 +59,7 @@ input {
   justify-content: center;
   gap: 0.35rem 1rem;
   padding: 0.55rem clamp(0.75rem, 3vw, 2rem);
-  background: var(--tomato);
+  background: var(--blue);
   color: var(--white);
   font-size: 0.82rem;
   text-align: center;
@@ -89,31 +90,10 @@ input {
   text-decoration: none;
 }
 
-.brand-mark {
-  display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--tomato);
-  color: var(--white);
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-
-.brand strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  line-height: 1;
-}
-
-.brand small {
-  display: block;
-  color: var(--muted);
-  font-size: 0.72rem;
-  line-height: 1.2;
+.brand img {
+  width: auto;
+  height: 3rem;
+  object-fit: contain;
 }
 
 .main-nav {
@@ -755,6 +735,13 @@ h3 {
     border-radius: var(--radius);
     background: var(--white);
     box-shadow: 0 12px 32px rgba(32, 24, 21, 0.24);
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  .mobile-order-bar.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(calc(100% + 1rem));
   }
 
   .mobile-order-bar a {
@@ -812,9 +799,6 @@ h3 {
   }
 
   .menu-tools {
-    position: sticky;
-    top: 4.05rem;
-    z-index: 10;
     margin-inline: -0.25rem;
     padding: 0.75rem;
   }
