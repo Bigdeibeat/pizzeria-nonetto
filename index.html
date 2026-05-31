@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pizzería Nonetto - Carta y pedidos</title>
+  <meta name="description"
+    content="Carta digital de Pizzería Nonetto en San Fernando. Consulta pizzas, entrantes, pastas, bebidas y llama para hacer tu pedido.">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <aside class="top-notice" aria-label="Información de carta">
+    <strong>Carta actualizada Enero 2026</strong>
+    <span>Este folleto invalida todos los anteriores.</span>
+    <span>Disponemos de carta de alérgenos. Para más información, consúltanos o visítanos en nuestro local.</span>
+  </aside>
+
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Volver al inicio">
+      <span class="brand-mark">N</span>
+      <span>
+        <strong>Nonetto</strong>
+        <small>Pizzería en San Fernando</small>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="#ofertas">Ofertas</a>
+      <a href="#carta">Carta</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <a class="call-link" href="tel:+34956900101">956 900 101</a>
+  </header>
+
+  <main id="inicio">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-media">
+        <img src="assets/nonetto-hero-pizza.png" alt="Pizza recién horneada con queso fundido y albahaca">
+      </div>
+      <div class="hero-layout">
+        <div class="hero-content">
+          <p class="eyebrow">Pizzería Nonetto · San Fernando</p>
+          <h1 id="hero-title">Calidad natural a tu alcance.</h1>
+          <p>
+            Mira la carta, elige tus favoritos y llama directamente para hacer tu pedido.
+          </p>
+          <div class="hero-quick-order" aria-label="Acciones principales">
+            <a class="big-call" href="tel:+34956900101">
+              <span>Pedir por teléfono</span>
+              <strong>956 900 101</strong>
+            </a>
+            <a class="big-menu" href="#carta">
+              <span>Ver carta completa</span>
+              <strong>Buscar pizzas, ofertas y entrantes</strong>
+            </a>
+          </div>
+          <div class="hero-meta" aria-label="Información del local">
+            <span>Calle Córdoba, 1</span>
+            <span>12:00-16:00 · 20:00-00:00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ofertas" class="offers-section" aria-labelledby="offers-title">
+      <div class="section-heading">
+        <p class="eyebrow">Ofertas Nonetto</p>
+        <h2 id="offers-title">¡A comer!</h2>
+        <p>El rincón de la familia, los amigos y, sobre todo, de los que gustan del ahorro.</p>
+      </div>
+
+      <div class="offers-layout">
+        <div class="offer-grid" aria-label="Ofertas destacadas">
+          <article class="offer-card dark-red">
+            <h3>Pizza mediana</h3>
+            <p>Nonetto classic + patatas + 2 latas de refresco 33 cl.</p>
+            <strong>14,00 EUR</strong>
+          </article>
+          <article class="offer-card red">
+            <h3>Pizza familiar</h3>
+            <p>Nonetto classic + patatas + 2 latas de refresco 33 cl.</p>
+            <strong>18,00 EUR</strong>
+          </article>
+          <article class="offer-card orange">
+            <h3>Pizza mediana + familiar</h3>
+            <p>Nonetto classic.</p>
+            <strong>17,00 EUR</strong>
+          </article>
+          <article class="offer-card orange-soft">
+            <h3>2 pizzas medianas</h3>
+            <p>Nonetto classic.</p>
+            <strong>15,00 EUR</strong>
+          </article>
+          <article class="offer-card amber">
+            <h3>2 pizzas familiares</h3>
+            <p>Nonetto classic.</p>
+            <strong>19,00 EUR</strong>
+          </article>
+          <article class="offer-card yellow">
+            <h3>2 pizzas medianas deluxe</h3>
+            <p>Especialidades deluxe.</p>
+            <strong>19,00 EUR</strong>
+          </article>
+          <article class="offer-card yellow-soft">
+            <h3>2 pizzas familiares deluxe</h3>
+            <p>Especialidades deluxe.</p>
+            <strong>23,00 EUR</strong>
+          </article>
+          <article class="offer-card pale">
+            <h3>Baguette o ponty</h3>
+            <p>A elegir + patatas + refresco 33 cl.</p>
+            <strong>7,50 EUR</strong>
+          </article>
+          <article class="offer-card pale">
+            <h3>Hamburguesa o sandwich</h3>
+            <p>A elegir + patatas + refresco 33 cl.</p>
+            <strong>7,50 EUR</strong>
+          </article>
+        </div>
+        <p class="offer-note">
+          Tienes la opción de elegir hasta 3 ingredientes al gusto. Las ofertas de 2 pizzas corresponden a pizzas de 3
+          ingredientes.
+          En los combos, las bebidas a elegir son: Pepsi, Pepsi 0, Kas naranja-limón, lata cerveza; para otros refrescos
+          consultar.
+        </p>
+      </div>
+    </section>
+
+    <section id="carta" class="menu-section" aria-labelledby="menu-title">
+      <div class="section-heading">
+        <p class="eyebrow">Carta Nonetto</p>
+        <h2 id="menu-title">Elige qué te apetece hoy</h2>
+        <p>
+          Busca por producto o ingrediente, filtra por categoría y llama cuando tengas claro el pedido.
+        </p>
+      </div>
+
+      <div class="menu-tools" aria-label="Herramientas de carta">
+        <label class="search-box">
+          <span>Buscar</span>
+          <input id="searchInput" type="search" placeholder="Carbonara, pollo, bacon..." autocomplete="off">
+        </label>
+
+        <div class="filter-group" aria-label="Filtros de categoría">
+          <button class="filter-button is-active" type="button" data-filter="todos">Todo</button>
+          <button class="filter-button" type="button" data-filter="pizzas">Pizzas</button>
+          <button class="filter-button" type="button" data-filter="entrantes">Entrantes</button>
+          <button class="filter-button" type="button" data-filter="pastas">Pastas</button>
+          <button class="filter-button" type="button" data-filter="bebidas">Bebidas</button>
+        </div>
+
+        <div class="quick-tags" aria-label="Filtros rápidos">
+          <button class="tag-filter" type="button" data-tag="popular">Popular</button>
+          <button class="tag-filter" type="button" data-tag="vegetariana">Vegetariana</button>
+          <button class="tag-filter" type="button" data-tag="picante">Picante</button>
+          <button class="tag-filter" type="button" data-tag="para compartir">Para compartir</button>
+        </div>
+      </div>
+
+      <div class="menu-summary" aria-live="polite">
+        <strong id="resultCount">0 productos</strong>
+        <span id="activeContext">Mostrando toda la carta</span>
+      </div>
+
+      <div id="menuGrid" class="menu-grid"></div>
+    </section>
+
+    <section id="contacto" class="contact-section" aria-labelledby="contact-title">
+      <div>
+        <p class="eyebrow">Pedidos y recogida</p>
+        <h2 id="contact-title">Llama y te lo preparamos.</h2>
+        <p>Estamos en San Fernando. Consulta la carta, dinos qué quieres y confirma tu pedido por teléfono.</p>
+      </div>
+      <div class="contact-card">
+        <a class="button primary full" href="tel:+34956900101">Llamar al 956 900 101</a>
+        <p>Calle Córdoba, 1 · San Fernando</p>
+        <p>Horario: 12:00-16:00 · 20:00-00:00</p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="mobile-order-bar" aria-label="Acciones rápidas para móvil">
+    <a href="#carta">Ver carta</a>
+    <a href="tel:+34956900101">Llamar</a>
+  </nav>
+
+  <div class="modal" id="productModal" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" data-close-modal aria-label="Cerrar detalle">×</button>
+      <img id="modalImage" src="" alt="">
+      <div class="modal-body">
+        <p id="modalCategory" class="eyebrow"></p>
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+        <dl class="detail-list">
+          <div>
+            <dt>Precios</dt>
+            <dd id="modalPrices"></dd>
+          </div>
+          <div>
+            <dt>Etiquetas</dt>
+            <dd id="modalTags"></dd>
+          </div>
+          <div>
+            <dt>Siguiente nivel</dt>
+            <dd>Consulta con el local si tienes alergias o intolerancias alimentarias.</dd>
+          </div>
+        </dl>
+        <a class="button primary full" href="tel:+34956900101">Llamar con este pedido</a>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
