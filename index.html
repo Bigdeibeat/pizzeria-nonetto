@@ -51,7 +51,6 @@
           </picture>
         </a>
         <nav class="hero-nav" aria-label="Navegación principal">
-          <a href="#ofertas">Ofertas</a>
           <a href="#carta">Carta</a>
           <a href="#contacto">Contacto</a>
         </nav>
@@ -71,12 +70,24 @@
             </a>
             <a class="big-menu" href="#carta">
               <span>Ver carta completa</span>
-              <strong>Buscar pizzas, ofertas y platos</strong>
+              <strong>Buscar pizzas, hamburguesas y platos</strong>
             </a>
           </div>
           <div class="hero-meta" aria-label="Información del local">
-            <span>Calle Córdoba, 1</span>
-            <span>12:00-16:00 · 20:00-00:00</span>
+            <span class="meta-item">
+              <svg class="meta-icon" aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M12 21s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z"></path>
+                <circle cx="12" cy="9" r="2.5"></circle>
+              </svg>
+              <span>Calle Córdoba, 1</span>
+            </span>
+            <span class="meta-item">
+              <svg class="meta-icon" aria-hidden="true" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8"></circle>
+                <path d="M12 7v5l3 2"></path>
+              </svg>
+              <span>12:00-16:00 · 20:00-00:00</span>
+            </span>
           </div>
         </div>
       </div>
@@ -90,6 +101,9 @@
 
     <section class="full-menu-section" aria-label="Carta completa en imágenes">
       <figure>
+        <img src="assets/OfertasPizzeriaNonetto.png" alt="Ofertas Pizzería Nonetto">
+      </figure>
+      <figure>
         <img src="assets/CartaPizzeriaNonetto01.png" alt="Carta Pizzería Nonetto: pizzas">
       </figure>
       <figure>
@@ -98,70 +112,6 @@
       <figure>
         <img src="assets/CartaPizzeriaNonetto03.png" alt="Carta Pizzería Nonetto: ensaladas, complementos y baguettes">
       </figure>
-    </section>
-
-    <section id="ofertas" class="offers-section" aria-labelledby="offers-title">
-      <div class="section-heading">
-        <p class="eyebrow">Ofertas Nonetto</p>
-        <h2 id="offers-title">¡A comer!</h2>
-        <p>El rincón de la familia, los amigos y, sobre todo, de los que gustan del ahorro.</p>
-      </div>
-
-      <div class="offers-layout">
-        <div class="offer-grid" aria-label="Ofertas destacadas">
-          <article class="offer-card dark-red">
-            <h3>Pizza mediana</h3>
-            <p>Nonetto classic + patatas + 2 latas de refresco 33 cl.</p>
-            <strong>14,00 EUR</strong>
-          </article>
-          <article class="offer-card red">
-            <h3>Pizza familiar</h3>
-            <p>Nonetto classic + patatas + 2 latas de refresco 33 cl.</p>
-            <strong>18,00 EUR</strong>
-          </article>
-          <article class="offer-card orange">
-            <h3>Pizza mediana + familiar</h3>
-            <p>Nonetto classic.</p>
-            <strong>17,00 EUR</strong>
-          </article>
-          <article class="offer-card orange-soft">
-            <h3>2 pizzas medianas</h3>
-            <p>Nonetto classic.</p>
-            <strong>15,00 EUR</strong>
-          </article>
-          <article class="offer-card amber">
-            <h3>2 pizzas familiares</h3>
-            <p>Nonetto classic.</p>
-            <strong>19,00 EUR</strong>
-          </article>
-          <article class="offer-card yellow">
-            <h3>2 pizzas medianas deluxe</h3>
-            <p>Especialidades deluxe.</p>
-            <strong>19,00 EUR</strong>
-          </article>
-          <article class="offer-card yellow-soft">
-            <h3>2 pizzas familiares deluxe</h3>
-            <p>Especialidades deluxe.</p>
-            <strong>23,00 EUR</strong>
-          </article>
-          <article class="offer-card pale">
-            <h3>Baguette o ponty</h3>
-            <p>A elegir + patatas + refresco 33 cl.</p>
-            <strong>7,50 EUR</strong>
-          </article>
-          <article class="offer-card pale">
-            <h3>Hamburguesa o sandwich</h3>
-            <p>A elegir + patatas + refresco 33 cl.</p>
-            <strong>7,50 EUR</strong>
-          </article>
-        </div>
-        <p class="offer-note">
-          Tienes la opción de elegir hasta 3 ingredientes al gusto. Las ofertas de 2 pizzas corresponden a pizzas de 3
-          ingredientes.
-          En los combos, las bebidas a elegir son: Pepsi, Pepsi 0, Kas naranja-limón, lata cerveza; para otros refrescos
-          consultar.
-        </p>
-      </div>
     </section>
 
     <section id="carta" class="menu-section" aria-labelledby="menu-title">
@@ -180,8 +130,8 @@
         </label>
 
         <div class="filter-group" aria-label="Filtros de categoría">
-          <button class="filter-button is-active" type="button" data-filter="todos">Todo</button>
-          <button class="filter-button" type="button" data-filter="pizzas">Pizzas</button>
+          <button class="filter-button" type="button" data-filter="todos">Todo</button>
+          <button class="filter-button is-active" type="button" data-filter="pizzas">Pizzas</button>
           <button class="filter-button" type="button" data-filter="hamburguesas">Hamburguesas</button>
           <button class="filter-button" type="button" data-filter="sandwiches">Sandwiches</button>
           <button class="filter-button" type="button" data-filter="pontys">Pontys</button>
