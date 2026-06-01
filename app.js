@@ -162,7 +162,7 @@ const modalElements = {
   closeButton: document.querySelector(".modal-close")
 };
 
-let activeCategory = "todos";
+let activeCategory = "pizzas";
 let pendingSearchFrame = null;
 
 function normalise(value) {
